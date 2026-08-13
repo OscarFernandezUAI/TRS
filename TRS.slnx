@@ -1,3 +1,21 @@
 <Solution>
-  <Project Path="TRS/TRS.csproj" />
+  <Project Path="BE/BE.csproj" />
+  <Project Path="BLL/BLL.csproj">
+    <BuildDependency Project="BE/BE.csproj" />
+    <BuildDependency Project="DAL/DAL.csproj" />
+    <BuildDependency Project="SEGURIDAD/SEGURIDAD.csproj" />
+  </Project>
+  <Project Path="DAL/DAL.csproj">
+    <BuildDependency Project="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
+  </Project>
+  <Project Path="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
+  <Project Path="SEGURIDAD/SEGURIDAD.csproj">
+    <BuildDependency Project="BE/BE.csproj" />
+    <BuildDependency Project="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
+  </Project>
+  <Project Path="TRS/GUI.csproj">
+    <BuildDependency Project="BE/BE.csproj" />
+    <BuildDependency Project="BLL/BLL.csproj" />
+    <BuildDependency Project="SEGURIDAD/SEGURIDAD.csproj" />
+  </Project>
 </Solution>
