@@ -6,16 +6,16 @@ using BLL;
 
 namespace GUI
 {
-    public partial class FormLogin : Form
+    public partial class FormLogin_517OF : Form
     {
         [DllImport("dwmapi.dll", PreserveSig = true)]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
         private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
 
-        public Usuario? UsuarioLogueado { get; private set; }
+        public Usuario_517OF? UsuarioLogueado { get; private set; }
 
-        public FormLogin()
+        public FormLogin_517OF()
         {
             InitializeComponent();
         }
@@ -29,15 +29,15 @@ namespace GUI
 
         private void btnIngresar_Click(object? sender, EventArgs e)
         {
-            if (!txtUsuario.Validar() || !txtContrasena.Validar())
+            if (!txtUsuario.Validar_517OF() || !txtContrasena.Validar_517OF())
             {
                 lblError.Text = "Completá usuario y contraseña.";
                 lblError.Visible = true;
                 return;
             }
 
-            var bll = new UsuarioBLL();
-            var usuario = bll.ValidarUsuario(txtUsuario.Text.Trim(), txtContrasena.Text);
+            var bll = new UsuarioBLL_517OF();
+            var usuario = bll.ValidarUsuario_517OF(txtUsuario.Text.Trim(), txtContrasena.Text);
 
             if (usuario == null)
             {

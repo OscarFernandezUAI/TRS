@@ -1,6 +1,6 @@
 ﻿namespace GUI
 {
-    partial class FormLogin
+    partial class FormLogin_517OF
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblUsuario = new GUI.ControlesComunes.LabelTraducible();
+            lblUsuario = new GUI.ControlesComunes.LabelTraducible_517OF();
             LblLogo = new Label();
-            lblSubtitulo = new GUI.ControlesComunes.LabelTraducible();
-            txtUsuario = new GUI.ControlesComunes.CajaTextoValidable();
-            lblContrasena = new GUI.ControlesComunes.LabelTraducible();
-            txtContrasena = new GUI.ControlesComunes.CajaTextoValidable();
+            lblSubtitulo = new GUI.ControlesComunes.LabelTraducible_517OF();
+            txtUsuario = new GUI.ControlesComunes.CajaTextoValidable_517OF();
+            lblContrasena = new GUI.ControlesComunes.LabelTraducible_517OF();
+            txtContrasena = new GUI.ControlesComunes.CajaTextoValidable_517OF();
             lblError = new Label();
-            btnIngresar = new GUI.ControlesComunes.BotonTraducible();
-            btnCancelar = new GUI.ControlesComunes.BotonTraducible();
+            btnIngresar = new GUI.ControlesComunes.BotonTraducible_517OF();
+            btnCancelar = new GUI.ControlesComunes.BotonTraducible_517OF();
             SuspendLayout();
             // 
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
-            lblUsuario.ClaveTraduccion = "LblUsuario";
+            lblUsuario.ClaveTraduccion_517OF = "LblUsuario";
             lblUsuario.Font = new Font("Segoe UI", 8F);
             lblUsuario.ForeColor = Color.FromArgb(154, 157, 163);
             lblUsuario.Location = new Point(372, 148);
@@ -66,7 +66,7 @@
             // lblSubtitulo
             // 
             lblSubtitulo.AutoSize = true;
-            lblSubtitulo.ClaveTraduccion = "LblLogin";
+            lblSubtitulo.ClaveTraduccion_517OF = "LblLogin";
             lblSubtitulo.Font = new Font("Segoe UI", 8F);
             lblSubtitulo.ForeColor = Color.FromArgb(107, 109, 115);
             lblSubtitulo.Location = new Point(313, 105);
@@ -89,7 +89,7 @@
             // lblContrasena
             // 
             lblContrasena.AutoSize = true;
-            lblContrasena.ClaveTraduccion = "LblPassword";
+            lblContrasena.ClaveTraduccion_517OF = "LblPassword";
             lblContrasena.Font = new Font("Segoe UI", 8F);
             lblContrasena.ForeColor = Color.FromArgb(154, 157, 163);
             lblContrasena.Location = new Point(361, 242);
@@ -124,7 +124,7 @@
             // btnIngresar
             // 
             btnIngresar.BackColor = Color.FromArgb(232, 173, 79);
-            btnIngresar.ClaveTraduccion = "BtnIngresar";
+            btnIngresar.ClaveTraduccion_517OF = "BtnIngresar";
             btnIngresar.FlatAppearance.BorderSize = 0;
             btnIngresar.FlatStyle = FlatStyle.Flat;
             btnIngresar.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
@@ -139,7 +139,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.ClaveTraduccion = "BtnCancelar";
+            btnCancelar.ClaveTraduccion_517OF = "BtnCancelar";
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 8.5F);
@@ -152,7 +152,7 @@
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // FormLogin
+            // FormLogin_517OF
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -179,14 +179,14 @@
 
         #endregion
 
-        private ControlesComunes.LabelTraducible lblUsuario;
+        private ControlesComunes.LabelTraducible_517OF lblUsuario;
         private Label LblLogo;
-        private ControlesComunes.LabelTraducible lblSubtitulo;
-        private ControlesComunes.CajaTextoValidable txtUsuario;
-        private ControlesComunes.LabelTraducible lblContrasena;
-        private ControlesComunes.CajaTextoValidable txtContrasena;
+        private ControlesComunes.LabelTraducible_517OF lblSubtitulo;
+        private ControlesComunes.CajaTextoValidable_517OF txtUsuario;
+        private ControlesComunes.LabelTraducible_517OF lblContrasena;
+        private ControlesComunes.CajaTextoValidable_517OF txtContrasena;
         private Label lblError;
-        private ControlesComunes.BotonTraducible btnIngresar;
-        private ControlesComunes.BotonTraducible btnCancelar;
+        private ControlesComunes.BotonTraducible_517OF btnIngresar;
+        private ControlesComunes.BotonTraducible_517OF btnCancelar;
     }
 }

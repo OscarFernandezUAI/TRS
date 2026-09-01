@@ -14,7 +14,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace TRS
 {
-    public partial class FormPrincipal : Form
+    public partial class FormPrincipal_517OF : Form
     {
         [DllImport("dwmapi.dll", PreserveSig = true)]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -46,36 +46,36 @@ namespace TRS
         private Panel _pnlFooterSinSesion = null!;
         private Panel _pnlFooterConSesion = null!;
         private Label _lblSinSesionArbol = null!;
-        public FormPrincipal()
+        public FormPrincipal_517OF()
         {
             InitializeComponent();
             BackColor = Estilos.FondoApp;
-            ConfigurarSidebar();
-            CargarNodosFijos();
+            ConfigurarSidebar_517OF();
+            CargarNodosFijos_517OF();
 
-            ConfigurarFooter();
-            ActualizarEstadoSidebar();
+            ConfigurarFooter_517OF();
+            ActualizarEstadoSidebar_517OF();
         }
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            AplicarModoOscuroBarraTitulo();
-            AplicarColorAreaMdi();
+            AplicarModoOscuroBarraTitulo_517OF();
+            AplicarColorAreaMdi_517OF();
         }
 
-        private void AplicarModoOscuroBarraTitulo()
+        private void AplicarModoOscuroBarraTitulo_517OF()
         {
             int valorActivar = 1;
             DwmSetWindowAttribute(Handle, DWMWA_USE_IMMERSIVE_DARK_MODE, ref valorActivar, sizeof(int));
         }
-        private void AplicarColorAreaMdi()
+        private void AplicarColorAreaMdi_517OF()
         {
             foreach (Control control in Controls)
             {
                 if (control is MdiClient mdiClient)
                 {
                     mdiClient.BackColor = Estilos.FondoApp;
-                    QuitarBordeMdi(mdiClient);
+                    QuitarBordeMdi_517OF(mdiClient);
                     break;
                 }
             }
@@ -85,7 +85,7 @@ namespace TRS
         // WS_EX_CLIENTEDGE), heredado del control nativo de Windows. No hay
         // una propiedad expuesta para sacarlo; hay que quitarle el estilo
         // extendido directamente y pedirle a Windows que redibuje el marco.
-        private void QuitarBordeMdi(Control mdiClient)
+        private void QuitarBordeMdi_517OF(Control mdiClient)
         {
             int estiloActual = GetWindowLong(mdiClient.Handle, GWL_EXSTYLE);
             SetWindowLong(mdiClient.Handle, GWL_EXSTYLE, estiloActual & ~WS_EX_CLIENTEDGE);
@@ -96,7 +96,7 @@ namespace TRS
 
         // Deja el TreeView listo para que nosotros dibujemos cada nodo a mano
         // (owner-draw), en vez de usar el estilo clásico de Windows.
-        private void ConfigurarSidebar()
+        private void ConfigurarSidebar_517OF()
         {
             ActivarDobleBufferNativo(treeMenu);
             pnlSidebar.BackColor = Estilos.FondoApp;
@@ -123,7 +123,7 @@ namespace TRS
 
         // Carga fija en español, solo para validar el look. Más adelante
         // esto se reemplaza por la carga dinámica según el mapa de navegación.
-        private void CargarNodosFijos()
+        private void CargarNodosFijos_517OF()
         {
             var nodoProductos = new TreeNode("Productos");
 
@@ -170,7 +170,7 @@ namespace TRS
             {
                 int chevronX = e.Bounds.Left + 8;
                 int chevronY = e.Bounds.Top + e.Bounds.Height / 2;
-                DibujarChevron(g, chevronX, chevronY, e.Node.IsExpanded);
+                DibujarChevron_517OF(g, chevronX, chevronY, e.Node.IsExpanded);
             }
 
             Color colorTexto = seleccionado
@@ -187,7 +187,7 @@ namespace TRS
         }
 
         // Triangulito: apunta a la derecha si está colapsado, hacia abajo si está expandido.
-        private void DibujarChevron(Graphics g, int x, int y, bool expandido)
+        private void DibujarChevron_517OF(Graphics g, int x, int y, bool expandido)
         {
             using (var brush = new SolidBrush(Estilos.TextoSecundario))
             {
@@ -233,7 +233,7 @@ namespace TRS
 
         // Arma los dos estados posibles del footer (sin sesión / con sesión) y el
         // mensaje que reemplaza al árbol cuando todavía no hay usuario logueado.
-        private void ConfigurarFooter()
+        private void ConfigurarFooter_517OF()
         {
             pnlFooter.BackColor = Estilos.FondoApp;
 
@@ -249,23 +249,23 @@ namespace TRS
             _lblSinSesionArbol.BringToFront();
 
             _pnlFooterSinSesion = new Panel { Dock = DockStyle.Fill, BackColor = Estilos.FondoApp };
-            var btnIniciarSesion = CrearBotonFooter("Iniciar sesión");
+            var btnIniciarSesion = CrearBotonFooter_517OF("Iniciar sesión");
             btnIniciarSesion.Dock = DockStyle.Top;
-            btnIniciarSesion.Click += (s, e) => AbrirLogin();
+            btnIniciarSesion.Click += (s, e) => AbrirLogin_517OF();
             _pnlFooterSinSesion.Controls.Add(btnIniciarSesion);
 
-            var btnSalirSinSesion = CrearBotonFooter("Salir");
+            var btnSalirSinSesion = CrearBotonFooter_517OF("Salir");
             btnSalirSinSesion.Dock = DockStyle.Bottom;
             btnSalirSinSesion.Click += (s, e) => Close();
             _pnlFooterSinSesion.Controls.Add(btnSalirSinSesion);
 
             _pnlFooterConSesion = new Panel { Dock = DockStyle.Fill, BackColor = Estilos.FondoApp, Visible = false };
-            var btnCerrarSesion = CrearBotonFooter("Cerrar sesión");
+            var btnCerrarSesion = CrearBotonFooter_517OF("Cerrar sesión");
             btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.Click += (s, e) =>
             {
-                Sesion.Instancia.CerrarSesion();
-                ActualizarEstadoSidebar();
+                Sesion_517OF.Instancia.CerrarSesion_517OF();
+                ActualizarEstadoSidebar_517OF();
             };
             _pnlFooterConSesion.Controls.Add(btnCerrarSesion);
 
@@ -274,7 +274,7 @@ namespace TRS
         }
 
         // Botón simple, mismo estilo visual que el resto del sidebar.
-        private Label CrearBotonFooter(string texto)
+        private Label CrearBotonFooter_517OF(string texto)
         {
             var lbl = new Label
             {
@@ -291,9 +291,9 @@ namespace TRS
         }
 
         // Decide qué mostrar en el sidebar según haya sesión activa o no.
-        private void ActualizarEstadoSidebar()
+        private void ActualizarEstadoSidebar_517OF()
         {
-            bool haySesion = Sesion.Instancia.HaySesionActiva;
+            bool haySesion = Sesion_517OF.Instancia.HaySesionActiva_517OF;
 
             treeMenu.Visible = haySesion;
             _lblSinSesionArbol.Visible = !haySesion;
@@ -302,14 +302,14 @@ namespace TRS
             _pnlFooterSinSesion.Visible = !haySesion;
         }
 
-        private void AbrirLogin()
+        private void AbrirLogin_517OF()
         {
-            using (var login = new FormLogin())
+            using (var login = new FormLogin_517OF())
             {
                 if (login.ShowDialog(this) == DialogResult.OK && login.UsuarioLogueado != null)
                 {
-                    Sesion.Instancia.IniciarSesion(login.UsuarioLogueado);
-                    ActualizarEstadoSidebar();
+                    Sesion_517OF.Instancia.IniciarSesion_517OF(login.UsuarioLogueado);
+                    ActualizarEstadoSidebar_517OF();
                 }
             }
         }

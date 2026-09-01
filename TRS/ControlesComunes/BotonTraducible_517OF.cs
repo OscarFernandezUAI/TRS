@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace GUI.ControlesComunes
 {
-    public class BotonTraducible : Button
+    public class BotonTraducible_517OF : Button
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string ClaveTraduccion { get; set; } = string.Empty;
+        public string ClaveTraduccion_517OF { get; set; } = string.Empty;
     }
 }
