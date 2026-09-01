@@ -1,5 +1,4 @@
-﻿using GUI;
-using SEGURIDAD;
+﻿using SEGURIDAD_517OF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Collections.Specialized.BitVector32;
 
-namespace TRS
+namespace GUI_517OF
 {
     public partial class FormPrincipal_517OF : Form
     {

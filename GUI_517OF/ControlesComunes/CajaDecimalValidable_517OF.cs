@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace GUI.ControlesComunes
+namespace GUI_517OF.ControlesComunes
 {
     public class CajaDecimalValidable_517OF : CajaTextoValidable_517OF
     {

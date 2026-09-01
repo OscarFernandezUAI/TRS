@@ -1,4 +1,4 @@
-﻿namespace TRS
+﻿namespace GUI_517OF
 {
     partial class FormPrincipal_517OF
     {

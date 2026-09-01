@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TRS.Properties
+namespace GUI_517OF.Properties
 {
 
 

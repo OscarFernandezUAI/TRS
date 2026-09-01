@@ -1,4 +1,4 @@
-﻿namespace GUI
+﻿namespace GUI_517OF
 {
     partial class FormLogin_517OF
     {
@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblUsuario = new GUI.ControlesComunes.LabelTraducible_517OF();
+            lblUsuario = new GUI_517OF.ControlesComunes.LabelTraducible_517OF();
             LblLogo = new Label();
-            lblSubtitulo = new GUI.ControlesComunes.LabelTraducible_517OF();
-            txtUsuario = new GUI.ControlesComunes.CajaTextoValidable_517OF();
-            lblContrasena = new GUI.ControlesComunes.LabelTraducible_517OF();
-            txtContrasena = new GUI.ControlesComunes.CajaTextoValidable_517OF();
+            lblSubtitulo = new GUI_517OF.ControlesComunes.LabelTraducible_517OF();
+            txtUsuario = new GUI_517OF.ControlesComunes.CajaTextoValidable_517OF();
+            lblContrasena = new GUI_517OF.ControlesComunes.LabelTraducible_517OF();
+            txtContrasena = new GUI_517OF.ControlesComunes.CajaTextoValidable_517OF();
             lblError = new Label();
-            btnIngresar = new GUI.ControlesComunes.BotonTraducible_517OF();
-            btnCancelar = new GUI.ControlesComunes.BotonTraducible_517OF();
+            btnIngresar = new GUI_517OF.ControlesComunes.BotonTraducible_517OF();
+            btnCancelar = new GUI_517OF.ControlesComunes.BotonTraducible_517OF();
             SuspendLayout();
             // 
             // lblUsuario

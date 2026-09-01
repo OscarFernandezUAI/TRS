@@ -1,7 +1,7 @@
-﻿using BE;
-using DAL;
+﻿using BE_517OF;
+using DAL_517OF;
 
-namespace BLL
+namespace BLL_517OF
 {
     public class UsuarioBLL_517OF
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace GUI.ControlesComunes
+namespace GUI_517OF.ControlesComunes
 {
     // Label estándar, sin lógica de traducción todavía.
     // La propiedad ClaveTraduccion_517OF queda preparada para cuando se

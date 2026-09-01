@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace GUI.ControlesComunes
+namespace GUI_517OF.ControlesComunes
 {
     public class BotonTraducible_517OF : Button
     {

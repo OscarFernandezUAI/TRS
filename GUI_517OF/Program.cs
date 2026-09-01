@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TRS
+namespace GUI_517OF
 {
     internal static class Program
     {

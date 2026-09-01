@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace TRS
+namespace GUI_517OF
 {
     public static class Estilos
     {

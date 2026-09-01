@@ -1,7 +1,7 @@
-﻿using BE;
+﻿using BE_517OF;
 
 
-namespace SEGURIDAD
+namespace SEGURIDAD_517OF
 {
     public sealed class Sesion_517OF
     {

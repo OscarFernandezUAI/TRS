@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BE
+namespace BE_517OF
 {
     public class Usuario_517OF
     {

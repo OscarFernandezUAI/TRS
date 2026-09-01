@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using BE;
-using BLL;
+using BE_517OF;
+using BLL_517OF;
 
-namespace GUI
+namespace GUI_517OF
 {
     public partial class FormLogin_517OF : Form
     {

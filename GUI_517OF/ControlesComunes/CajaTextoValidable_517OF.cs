@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace GUI.ControlesComunes
+namespace GUI_517OF.ControlesComunes
 {
     public class CajaTextoValidable_517OF : TextBox
     {

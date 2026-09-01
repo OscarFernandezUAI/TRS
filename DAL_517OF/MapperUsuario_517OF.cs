@@ -1,9 +1,9 @@
 ﻿using System.Data;
-using BE;
-using DAL_SERVICIOS;
+using BE_517OF;
+using DAL_SERVICIOS_517OF;
 using Microsoft.Data.SqlClient;
 
-namespace DAL
+namespace DAL_517OF
 {
     public class MapperUsuario_517OF
     {

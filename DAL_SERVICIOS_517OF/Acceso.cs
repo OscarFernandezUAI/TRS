@@ -3,7 +3,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 
 
-namespace DAL_SERVICIOS
+namespace DAL_SERVICIOS_517OF
 {
     public class Acceso
     {
