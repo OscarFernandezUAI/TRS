@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace GUI.ControlesComunes
+namespace GUI_517OF.ControlesComunes
 {
-    public class BotonTraducible : Button
+    public class BotonTraducible_517OF : Button
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
-        public string ClaveTraduccion { get; set; } = string.Empty;
+        public string ClaveTraduccion_517OF { get; set; } = string.Empty;
     }
 }

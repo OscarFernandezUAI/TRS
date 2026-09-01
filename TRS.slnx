@@ -1,23 +1,23 @@
 <Solution>
-  <Project Path="BE/BE.csproj" />
-  <Project Path="BLL/BLL.csproj">
-    <BuildDependency Project="BE/BE.csproj" />
-    <BuildDependency Project="DAL/DAL.csproj" />
-    <BuildDependency Project="SEGURIDAD/SEGURIDAD.csproj" />
+  <Project Path="BE_517OF/BE_517OF.csproj" />
+  <Project Path="BLL_517OF/BLL_517OF.csproj">
+    <BuildDependency Project="BE_517OF/BE_517OF.csproj" />
+    <BuildDependency Project="DAL_517OF/DAL_517OF.csproj" />
+    <BuildDependency Project="SEGURIDAD_517OF/SEGURIDAD_517OF.csproj" />
   </Project>
-  <Project Path="DAL/DAL.csproj">
-    <BuildDependency Project="BE/BE.csproj" />
-    <BuildDependency Project="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
-    <BuildDependency Project="SEGURIDAD/SEGURIDAD.csproj" />
+  <Project Path="DAL_517OF/DAL_517OF.csproj">
+    <BuildDependency Project="BE_517OF/BE_517OF.csproj" />
+    <BuildDependency Project="DAL_SERVICIOS_517OF/DAL_SERVICIOS_517OF.csproj" />
+    <BuildDependency Project="SEGURIDAD_517OF/SEGURIDAD_517OF.csproj" />
   </Project>
-  <Project Path="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
-  <Project Path="SEGURIDAD/SEGURIDAD.csproj">
-    <BuildDependency Project="BE/BE.csproj" />
-    <BuildDependency Project="DAL_SERVICIOS/DAL_SERVICIOS.csproj" />
+  <Project Path="DAL_SERVICIOS_517OF/DAL_SERVICIOS_517OF.csproj" />
+  <Project Path="SEGURIDAD_517OF/SEGURIDAD_517OF.csproj">
+    <BuildDependency Project="BE_517OF/BE_517OF.csproj" />
+    <BuildDependency Project="DAL_SERVICIOS_517OF/DAL_SERVICIOS_517OF.csproj" />
   </Project>
-  <Project Path="TRS/GUI.csproj" Id="bacfbf7b-c993-4df0-ac7e-62c9f9963b88">
-    <BuildDependency Project="BE/BE.csproj" />
-    <BuildDependency Project="BLL/BLL.csproj" />
-    <BuildDependency Project="SEGURIDAD/SEGURIDAD.csproj" />
+  <Project Path="GUI_517OF/GUI_517OF.csproj" Id="bacfbf7b-c993-4df0-ac7e-62c9f9963b88">
+    <BuildDependency Project="BE_517OF/BE_517OF.csproj" />
+    <BuildDependency Project="BLL_517OF/BLL_517OF.csproj" />
+    <BuildDependency Project="SEGURIDAD_517OF/SEGURIDAD_517OF.csproj" />
   </Project>
 </Solution>

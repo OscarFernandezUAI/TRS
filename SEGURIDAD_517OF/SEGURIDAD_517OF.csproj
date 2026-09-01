@@ -7,9 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BE\BE.csproj" />
-    <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\SEGURIDAD\SEGURIDAD.csproj" />
+    <ProjectReference Include="..\BE_517OF\BE_517OF.csproj" />
+    <ProjectReference Include="..\DAL_SERVICIOS_517OF\DAL_SERVICIOS_517OF.csproj" />
   </ItemGroup>
 
 </Project>

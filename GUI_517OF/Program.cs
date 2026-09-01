@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace TRS
+namespace GUI_517OF
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace TRS
             Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormPrincipal());
+            Application.Run(new FormPrincipal_517OF());
         }
     }
 }

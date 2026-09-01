@@ -1,6 +1,6 @@
-﻿namespace TRS
+﻿namespace GUI_517OF
 {
-    partial class FormPrincipal
+    partial class FormPrincipal_517OF
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -63,7 +63,7 @@
             treeMenu.Size = new Size(250, 691);
             treeMenu.TabIndex = 0;
             // 
-            // FormPrincipal
+            // FormPrincipal_517OF
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
