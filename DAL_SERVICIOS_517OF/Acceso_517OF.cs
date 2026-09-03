@@ -5,13 +5,13 @@ using Microsoft.Data.SqlClient;
 
 namespace DAL_SERVICIOS_517OF
 {
-    public class Acceso
+    public class Acceso_517OF
     {
-        private SqlConnection? _conex;
-        private SqlTransaction? tx;
+        private SqlConnection? _conex_517OF;
+        private SqlTransaction? _tx_517OF;
 
         // En App.config tengo definidas las conexiones a las dos DBs (TRSDiploma y master)
-        public static string ObtenerCadena(string qconexion)
+        public static string ObtenerCadena_517OF(string qconexion)
         {
             var connStringObject = ConfigurationManager.ConnectionStrings[qconexion];
             if (connStringObject != null)
@@ -24,64 +24,64 @@ namespace DAL_SERVICIOS_517OF
             }
         }
 
-        private void abrir(string qbase)
+        private void Abrir_517OF(string qbase)
         {
-            _conex = new SqlConnection(ObtenerCadena(qbase));
-            _conex.Open();
+            _conex_517OF = new SqlConnection(ObtenerCadena_517OF(qbase));
+            _conex_517OF.Open();
         }
 
-        private void Cerrar()
+        private void Cerrar_517OF()
         {
-            if (_conex != null)
+            if (_conex_517OF != null)
             {
-                _conex.Close();
-                _conex.Dispose();
-                _conex = null;
+                _conex_517OF.Close();
+                _conex_517OF.Dispose();
+                _conex_517OF = null;
             }
         }
 
-        public int Ejecutar(string nombreSP, SqlParameter[]? paramsArray = null)
+        public int Ejecutar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
-            abrir("MiConexion");
+            Abrir_517OF("MiConexion");
             int fa = -1;
 
             using (SqlCommand cmd = new SqlCommand())
             {
                 cmd.CommandText = nombreSP;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex;
+                cmd.Connection = _conex_517OF;
 
                 if (paramsArray != null)
                 {
                     cmd.Parameters.AddRange(paramsArray);
                 }
 
-                if (_conex != null)
+                if (_conex_517OF != null)
                 {
-                    tx = _conex.BeginTransaction();
-                    cmd.Transaction = tx;
+                    _tx_517OF = _conex_517OF.BeginTransaction();
+                    cmd.Transaction = _tx_517OF;
                 }
 
                 try
                 {
                     fa = cmd.ExecuteNonQuery();
-                    if (tx != null) tx.Commit();
+                    if (_tx_517OF != null) _tx_517OF.Commit();
                 }
                 catch (Exception)
                 {
                     fa = -1;
-                    if (tx != null) tx.Rollback();
+                    if (_tx_517OF != null) _tx_517OF.Rollback();
                 }
                 finally
                 {
-                    Cerrar();
+                    Cerrar_517OF();
                 }
             }
 
             return fa;
         }
 
-        public DataTable Leer(string nomst, SqlParameter[]? paramsArray = null)
+        public DataTable Leer_517OF(string nomst, SqlParameter[]? paramsArray = null)
         {
             DataTable dt = new DataTable();
 
@@ -91,8 +91,8 @@ namespace DAL_SERVICIOS_517OF
                 da.SelectCommand.CommandText = nomst;
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                abrir("MiConexion");
-                da.SelectCommand.Connection = _conex;
+                Abrir_517OF("MiConexion");
+                da.SelectCommand.Connection = _conex_517OF;
 
                 if (paramsArray != null)
                 {
@@ -100,18 +100,18 @@ namespace DAL_SERVICIOS_517OF
                 }
 
                 da.Fill(dt);
-                Cerrar();
+                Cerrar_517OF();
             }
 
             return dt;
         }
 
-        public int LeerEscalar(string nomst, SqlParameter[]? paramsArray = null)
+        public int LeerEscalar_517OF(string nomst, SqlParameter[]? paramsArray = null)
         {
-            abrir("MiConexion");
+            Abrir_517OF("MiConexion");
             int valorEscalar = 0;
 
-            using (SqlCommand cmd = new SqlCommand(nomst, _conex))
+            using (SqlCommand cmd = new SqlCommand(nomst, _conex_517OF))
             {
                 if (paramsArray != null)
                 {
@@ -133,23 +133,23 @@ namespace DAL_SERVICIOS_517OF
                 }
                 finally
                 {
-                    Cerrar();
+                    Cerrar_517OF();
                 }
             }
 
             return valorEscalar;
         }
 
-        public int Escribir(string nomst, SqlParameter[]? paramsArray = null)
+        public int Escribir_517OF(string nomst, SqlParameter[]? paramsArray = null)
         {
-            abrir("MiConexion");
+            Abrir_517OF("MiConexion");
             int fa = -1;
 
             using (SqlCommand cmd = new SqlCommand())
             {
                 cmd.CommandText = nomst;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex;
+                cmd.Connection = _conex_517OF;
 
                 if (paramsArray != null)
                 {
@@ -166,23 +166,23 @@ namespace DAL_SERVICIOS_517OF
                 }
                 finally
                 {
-                    Cerrar();
+                    Cerrar_517OF();
                 }
             }
 
             return fa;
         }
 
-        public int EscribirMaster(string nomst, SqlParameter[]? paramsArray = null)
+        public int EscribirMaster_517OF(string nomst, SqlParameter[]? paramsArray = null)
         {
-            abrir("MiConexionMaster");
+            Abrir_517OF("MiConexionMaster");
             int fa = -1;
 
             using (SqlCommand cmd = new SqlCommand())
             {
                 cmd.CommandText = nomst;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex;
+                cmd.Connection = _conex_517OF;
 
                 if (paramsArray != null)
                 {
@@ -199,7 +199,7 @@ namespace DAL_SERVICIOS_517OF
                 }
                 finally
                 {
-                    Cerrar();
+                    Cerrar_517OF();
                 }
             }
 
@@ -208,7 +208,7 @@ namespace DAL_SERVICIOS_517OF
 
         #region CrearParámetros
 
-        public SqlParameter crearparam(string nombre, string? valor)
+        public SqlParameter CrearParam_517OF(string nombre, string? valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
@@ -217,7 +217,7 @@ namespace DAL_SERVICIOS_517OF
             return p;
         }
 
-        public SqlParameter crearparam(string nombre, int valor)
+        public SqlParameter CrearParam_517OF(string nombre, int valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
@@ -226,7 +226,7 @@ namespace DAL_SERVICIOS_517OF
             return p;
         }
 
-        public SqlParameter crearparam(string nombre, DateTime valor)
+        public SqlParameter CrearParam_517OF(string nombre, DateTime valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
@@ -235,7 +235,7 @@ namespace DAL_SERVICIOS_517OF
             return p;
         }
 
-        public SqlParameter crearparam(string nombre, bool valor)
+        public SqlParameter CrearParam_517OF(string nombre, bool valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
@@ -244,7 +244,7 @@ namespace DAL_SERVICIOS_517OF
             return p;
         }
 
-        public SqlParameter crearparam(string nombre, double valor)
+        public SqlParameter CrearParam_517OF(string nombre, double valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
@@ -253,7 +253,7 @@ namespace DAL_SERVICIOS_517OF
             return p;
         }
 
-        public SqlParameter crearparam(string nombre, decimal valor)
+        public SqlParameter CrearParam_517OF(string nombre, decimal valor)
         {
             SqlParameter p = new SqlParameter();
             p.ParameterName = nombre;
