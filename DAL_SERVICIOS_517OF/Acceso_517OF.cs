@@ -11,7 +11,7 @@ namespace DAL_SERVICIOS_517OF
         private SqlTransaction? _tx_517OF;
 
         // En App.config tengo definidas las conexiones a las dos DBs (TRSDiploma y master)
-        public static string ObtenerCadena_517OF(string qconexion)
+        private static string ObtenerCadena_517OF(string qconexion)
         {
             var connStringObject = ConfigurationManager.ConnectionStrings[qconexion];
             if (connStringObject != null)
