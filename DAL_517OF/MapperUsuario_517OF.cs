@@ -9,14 +9,14 @@ namespace DAL_517OF
     {
         public Usuario_517OF? ObtenerPorNombreUsuario_517OF(Usuario_517OF usuarioBusqueda)
         {
-            var acceso = new Acceso();
+            var acceso = new Acceso_517OF();
 
             SqlParameter[] parametros = new SqlParameter[]
             {
-        acceso.crearparam("@NombreUsuario_517OF", usuarioBusqueda.NombreUsuario_517OF)
+        acceso.CrearParam_517OF("@NombreUsuario_517OF", usuarioBusqueda.NombreUsuario_517OF)
             };
 
-            DataTable dt = acceso.Leer("sp_Usuario_ObtenerPorNombreUsuario_517OF", parametros);
+            DataTable dt = acceso.Leer_517OF("sp_Usuario_ObtenerPorNombreUsuario_517OF", parametros);
 
             if (dt.Rows.Count == 0)
                 return null;
