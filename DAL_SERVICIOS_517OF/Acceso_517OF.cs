@@ -81,14 +81,14 @@ namespace DAL_SERVICIOS_517OF
             return fa;
         }
 
-        public DataTable Leer_517OF(string nomst, SqlParameter[]? paramsArray = null)
+        public DataTable Leer_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
             DataTable dt = new DataTable();
 
             using (SqlDataAdapter da = new SqlDataAdapter())
             {
                 da.SelectCommand = new SqlCommand();
-                da.SelectCommand.CommandText = nomst;
+                da.SelectCommand.CommandText = nombreSP;
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
                 Abrir_517OF("MiConexion");
@@ -106,12 +106,12 @@ namespace DAL_SERVICIOS_517OF
             return dt;
         }
 
-        public int LeerEscalar_517OF(string nomst, SqlParameter[]? paramsArray = null)
+        public int LeerEscalar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
             Abrir_517OF("MiConexion");
             int valorEscalar = 0;
 
-            using (SqlCommand cmd = new SqlCommand(nomst, _conex_517OF))
+            using (SqlCommand cmd = new SqlCommand(nombreSP, _conex_517OF))
             {
                 if (paramsArray != null)
                 {
@@ -140,14 +140,14 @@ namespace DAL_SERVICIOS_517OF
             return valorEscalar;
         }
 
-        public int Escribir_517OF(string nomst, SqlParameter[]? paramsArray = null)
+        public int Escribir_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
             Abrir_517OF("MiConexion");
             int fa = -1;
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = nomst;
+                cmd.CommandText = nombreSP;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = _conex_517OF;
 
@@ -173,14 +173,14 @@ namespace DAL_SERVICIOS_517OF
             return fa;
         }
 
-        public int EscribirMaster_517OF(string nomst, SqlParameter[]? paramsArray = null)
+        public int EscribirMaster_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
             Abrir_517OF("MiConexionMaster");
             int fa = -1;
 
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = nomst;
+                cmd.CommandText = nombreSP;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Connection = _conex_517OF;
 
