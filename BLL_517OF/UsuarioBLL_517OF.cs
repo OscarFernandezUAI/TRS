@@ -20,7 +20,11 @@ namespace BLL_517OF
             if (usuario.ClaveHash_517OF != claveIngresada)
                 return null;
 
-            new BitacoraEventoSEG_517OF().Registrar_517OF(usuario.Id_517OF, (int)TipoEvento_517OF.Login_517OF);
+            new BitacoraEventoSEG_517OF().Registrar_517OF(new BitacoraEvento_517OF
+            {
+                Usuario_517OF = usuario,
+                TipoEvento_517OF = new TipoEvento_517OF { Id_517OF = (int)EventosConocidos_517OF.Login_517OF }
+            });
             return usuario;
         }
 

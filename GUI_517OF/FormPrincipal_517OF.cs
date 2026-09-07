@@ -264,12 +264,14 @@ namespace GUI_517OF
             btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.Click += (s, e) =>
             {
-                btnCerrarSesion.Click += (s, e) =>
-                {
-                    new BitacoraEventoSEG_517OF().Registrar_517OF(Sesion_517OF.Instancia.UsuarioActual_517OF!.Id_517OF, (int)TipoEvento_517OF.Logout_517OF);
-                    Sesion_517OF.Instancia.CerrarSesion_517OF();
-                    ActualizarEstadoSidebar_517OF();
-                };
+                new BitacoraEventoSEG_517OF().Registrar_517OF(new BitacoraEvento_517OF
+                    {
+                        Usuario_517OF = Sesion_517OF.Instancia.UsuarioActual_517OF!,
+                        TipoEvento_517OF = new TipoEvento_517OF { Id_517OF = (int)EventosConocidos_517OF.Logout_517OF }
+                    });
+                Sesion_517OF.Instancia.CerrarSesion_517OF();
+                ActualizarEstadoSidebar_517OF();
+                
             };
             _pnlFooterConSesion.Controls.Add(btnCerrarSesion);
 
