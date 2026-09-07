@@ -1,6 +1,7 @@
 ﻿using System;
 using BE_517OF;
 using DAL_517OF;
+using SEGURIDAD_517OF;
 
 namespace BLL_517OF
 {
@@ -19,6 +20,7 @@ namespace BLL_517OF
             if (usuario.ClaveHash_517OF != claveIngresada)
                 return null;
 
+            new BitacoraEventoSEG_517OF().Registrar_517OF(usuario.Id_517OF, (int)TipoEvento_517OF.Login_517OF);
             return usuario;
         }
 
@@ -43,8 +45,8 @@ namespace BLL_517OF
 
         public List<Usuario_517OF> Consultar_517OF()
         {
-            // TODO: implementar delegación real al DAL cuando exista una pantalla que lo use.
-            throw new NotImplementedException();
+            var dal = new MapperUsuario_517OF();
+            return dal.Consultar_517OF();
         }
         public Usuario_517OF? ObtenerPorNombreUsuario_517OF(string nombreUsuario)
         {
