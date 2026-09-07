@@ -1,4 +1,5 @@
-﻿using SEGURIDAD_517OF;
+﻿using BE_517OF;
+using SEGURIDAD_517OF;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -263,8 +264,12 @@ namespace GUI_517OF
             btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.Click += (s, e) =>
             {
-                Sesion_517OF.Instancia.CerrarSesion_517OF();
-                ActualizarEstadoSidebar_517OF();
+                btnCerrarSesion.Click += (s, e) =>
+                {
+                    new BitacoraEventoSEG_517OF().Registrar_517OF(Sesion_517OF.Instancia.UsuarioActual_517OF!.Id_517OF, (int)TipoEvento_517OF.Logout_517OF);
+                    Sesion_517OF.Instancia.CerrarSesion_517OF();
+                    ActualizarEstadoSidebar_517OF();
+                };
             };
             _pnlFooterConSesion.Controls.Add(btnCerrarSesion);
 
