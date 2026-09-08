@@ -261,7 +261,23 @@ namespace DAL_SERVICIOS_517OF
             p.DbType = DbType.Decimal;
             return p;
         }
+        public SqlParameter CrearParam_517OF(string nombre, int? valor)
+        {
+            SqlParameter p = new SqlParameter();
+            p.ParameterName = nombre;
+            p.Value = valor.HasValue ? valor.Value : DBNull.Value;
+            p.DbType = DbType.Int32;
+            return p;
+        }
 
+        public SqlParameter CrearParam_517OF(string nombre, DateTime? valor)
+        {
+            SqlParameter p = new SqlParameter();
+            p.ParameterName = nombre;
+            p.Value = valor.HasValue ? valor.Value : DBNull.Value;
+            p.DbType = DbType.DateTime2;
+            return p;
+        }
         #endregion
 
     }

@@ -31,7 +31,9 @@ namespace DAL_517OF
             SqlParameter[] parametros = new SqlParameter[]
             {
                 acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
-                acceso.CrearParam_517OF("@Clave_517OF", entidad.ClaveHash_517OF)
+                acceso.CrearParam_517OF("@Clave_517OF", entidad.ClaveHash_517OF),
+                acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
+                acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
             };
 
             return acceso.Escribir_517OF("sp_Usuario_Alta_517OF", parametros);
@@ -56,7 +58,9 @@ namespace DAL_517OF
             SqlParameter[] parametros = new SqlParameter[]
             {
                 acceso.CrearParam_517OF("@IdUsuario_517OF", entidad.Id_517OF),
-                acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF)
+                acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
+                acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
+                acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
             };
 
             return acceso.Escribir_517OF("sp_Usuario_Modificar_517OF", parametros);
@@ -88,6 +92,8 @@ namespace DAL_517OF
                 Activo_517OF = (bool)fila["Activo_517OF"],
                 Bloqueado_517OF = (bool)fila["Bloqueado_517OF"],
                 DebeCambiarClave_517OF = (bool)fila["DebeCambiarClave_517OF"],
+                Nombre_517OF = fila["Nombre_517OF"].ToString() ?? string.Empty,
+                Apellido_517OF = fila["Apellido_517OF"].ToString() ?? string.Empty,
                 FechaCreacion_517OF = (DateTime)fila["FechaCreacion_517OF"],
                 FechaEliminacion_517OF = fila["FechaEliminacion_517OF"] == DBNull.Value ? null : (DateTime?)fila["FechaEliminacion_517OF"],
                 DVH_517OF = fila["DVH_517OF"] == DBNull.Value ? string.Empty : fila["DVH_517OF"].ToString() ?? string.Empty

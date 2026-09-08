@@ -1,16 +1,9 @@
 ﻿using BE_517OF;
 using SEGURIDAD_517OF;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Collections.Specialized.BitVector32;
 
 namespace GUI_517OF
 {
@@ -31,6 +24,7 @@ namespace GUI_517OF
         [DllImport("user32.dll")]
         private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
 
+        private MdiClient? _mdiClient_517OF;
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_CLIENTEDGE = 0x200;
         private const uint SWP_FRAMECHANGED = 0x0020;
@@ -39,13 +33,13 @@ namespace GUI_517OF
         private const uint SWP_NOZORDER = 0x0004;
         private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
         private TreeNode? _nodoHover;
-        private const int TVM_SETEXTENDEDSTYLE = 0x112C; // Mensaje nativo para configurar estilos extendidos del TreeView
-        private const int TVS_EX_DOUBLEBUFFER = 0x0004;   // Estilo extendido: doble buffer real del control nativo
+        private const int TVM_SETEXTENDEDSTYLE = 0x112C;
+        private const int TVS_EX_DOUBLEBUFFER = 0x0004;
 
-        
         private Panel _pnlFooterSinSesion = null!;
         private Panel _pnlFooterConSesion = null!;
         private Label _lblSinSesionArbol = null!;
+
         public FormPrincipal_517OF()
         {
             InitializeComponent();
@@ -56,6 +50,7 @@ namespace GUI_517OF
             ConfigurarFooter_517OF();
             ActualizarEstadoSidebar_517OF();
         }
+
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
@@ -68,23 +63,25 @@ namespace GUI_517OF
             int valorActivar = 1;
             DwmSetWindowAttribute(Handle, DWMWA_USE_IMMERSIVE_DARK_MODE, ref valorActivar, sizeof(int));
         }
+
         private void AplicarColorAreaMdi_517OF()
         {
             foreach (Control control in Controls)
             {
                 if (control is MdiClient mdiClient)
                 {
+                    _mdiClient_517OF = mdiClient;
                     mdiClient.BackColor = Estilos.FondoApp;
                     QuitarBordeMdi_517OF(mdiClient);
+                    mdiClient.Dock = DockStyle.None;
+                    AjustarAreaMdi_517OF();
                     break;
                 }
             }
+
+            pnlSidebar.BringToFront();
         }
 
-        // El MdiClient trae por defecto un borde 3D hundido (estilo extendido
-        // WS_EX_CLIENTEDGE), heredado del control nativo de Windows. No hay
-        // una propiedad expuesta para sacarlo; hay que quitarle el estilo
-        // extendido directamente y pedirle a Windows que redibuje el marco.
         private void QuitarBordeMdi_517OF(Control mdiClient)
         {
             int estiloActual = GetWindowLong(mdiClient.Handle, GWL_EXSTYLE);
@@ -94,8 +91,6 @@ namespace GUI_517OF
                 SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
         }
 
-        // Deja el TreeView listo para que nosotros dibujemos cada nodo a mano
-        // (owner-draw), en vez de usar el estilo clásico de Windows.
         private void ConfigurarSidebar_517OF()
         {
             ActivarDobleBufferNativo(treeMenu);
@@ -121,35 +116,64 @@ namespace GUI_517OF
             treeMenu.AfterCollapse += (s, e) => treeMenu.Invalidate();
         }
 
-        // Carga fija en español, solo para validar el look. Más adelante
-        // esto se reemplaza por la carga dinámica según el mapa de navegación.
+        // Estructura oficial del menú (según EjemploMenu.docx del profesor).
+        // Todos los nodos son de mentira todavía, salvo "Bitácora Eventos",
+        // que ya abre una pantalla real. Se van reemplazando a medida que
+        // construimos cada módulo.
         private void CargarNodosFijos_517OF()
         {
-            var nodoProductos = new TreeNode("Productos");
+            var nodoAdmin = new TreeNode("Admin");
+            nodoAdmin.Nodes.Add(new TreeNode("Usuarios"));
+            nodoAdmin.Nodes.Add(new TreeNode("Perfiles"));
+            nodoAdmin.Nodes.Add(new TreeNode("Backup"));
+            nodoAdmin.Nodes.Add(new TreeNode("Restore"));
+            nodoAdmin.Nodes.Add(new TreeNode("Bitácora Eventos"));
+            nodoAdmin.Nodes.Add(new TreeNode("Dígito Verificador"));
 
-            var nodoGestionCompras = new TreeNode("Gestión de compras");
-            nodoGestionCompras.Nodes.Add(new TreeNode("Orden de compra"));
-            nodoGestionCompras.Nodes.Add(new TreeNode("Recepción de mercadería"));
+            var nodoMaestros = new TreeNode("Maestros");
+            nodoMaestros.Nodes.Add(new TreeNode("Productos"));
+            nodoMaestros.Nodes.Add(new TreeNode("Clientes"));
+            nodoMaestros.Nodes.Add(new TreeNode("Proveedores"));
+            nodoMaestros.Nodes.Add(new TreeNode("Bitácora de Cambios"));
 
-            var nodoCompras = new TreeNode("Compras");
-            nodoCompras.Nodes.Add(nodoGestionCompras);
-            nodoCompras.Nodes.Add(new TreeNode("Proveedores"));
+            // Login/Logout ya están resueltos en el footer (Iniciar/Cerrar
+            // sesión) — quedan acá como referencia fiel al mockup del
+            // profesor, a decidir si los sacamos para no duplicar.
+            var nodoUsuario = new TreeNode("Usuario");
+            nodoUsuario.Nodes.Add(new TreeNode("Login"));
+            nodoUsuario.Nodes.Add(new TreeNode("Cambiar Clave"));
+            nodoUsuario.Nodes.Add(new TreeNode("Logout"));
+            nodoUsuario.Nodes.Add(new TreeNode("Cambiar Idioma"));
 
             var nodoVentas = new TreeNode("Ventas");
-            var nodoReposicion = new TreeNode("Reposición");
-            var nodoAdministracion = new TreeNode("Administración");
+            nodoVentas.Nodes.Add(new TreeNode("Carrito"));
+            nodoVentas.Nodes.Add(new TreeNode("Facturar"));
+            nodoVentas.Nodes.Add(new TreeNode("Despachar"));
+
+            var nodoCompras = new TreeNode("Compras");
+            nodoCompras.Nodes.Add(new TreeNode("Cotizaciones"));
+            nodoCompras.Nodes.Add(new TreeNode("Orden de Compra"));
+            nodoCompras.Nodes.Add(new TreeNode("Recepción"));
+
+            var nodoReportes = new TreeNode("Reportes");
+            nodoReportes.Nodes.Add(new TreeNode("Reporte de Ventas"));
+            nodoReportes.Nodes.Add(new TreeNode("Reporte de Compras"));
+            nodoReportes.Nodes.Add(new TreeNode("Reporte Inteligente"));
+
+            var nodoAyuda = new TreeNode("Ayuda");
+            nodoAyuda.Nodes.Add(new TreeNode("Maestros"));
+            nodoAyuda.Nodes.Add(new TreeNode("Ventas"));
+            nodoAyuda.Nodes.Add(new TreeNode("Compras"));
 
             treeMenu.Nodes.AddRange(new[]
             {
-             nodoProductos, nodoCompras,
-             nodoVentas, nodoReposicion, nodoAdministracion
-    });
-                       
-            nodoCompras.Expand();
-            nodoGestionCompras.Expand();
+                nodoAdmin, nodoMaestros, nodoUsuario,
+                nodoVentas, nodoCompras, nodoReportes, nodoAyuda
+            });
+
+            nodoAdmin.Expand();
         }
 
-        // Se ejecuta una vez por cada nodo visible, cada vez que hay que redibujar.
         private void treeMenu_DrawNode(object? sender, DrawTreeNodeEventArgs e)
         {
             var g = e.Graphics;
@@ -186,7 +210,6 @@ namespace GUI_517OF
                 TextFormatFlags.VerticalCenter | TextFormatFlags.Left);
         }
 
-        // Triangulito: apunta a la derecha si está colapsado, hacia abajo si está expandido.
         private void DibujarChevron_517OF(Graphics g, int x, int y, bool expandido)
         {
             using (var brush = new SolidBrush(Estilos.TextoSecundario))
@@ -205,6 +228,8 @@ namespace GUI_517OF
 
             if (e.Node!.Nodes.Count > 0)
                 e.Node.Toggle();
+            else if (e.Node.Text == "Bitácora Eventos")
+                AbrirPantalla_517OF(new FormBitacoraEventos_517OF());
         }
 
         private void treeMenu_MouseMove(object? sender, MouseEventArgs e)
@@ -222,17 +247,12 @@ namespace GUI_517OF
             _nodoHover = null;
             treeMenu.Invalidate();
         }
-        // A diferencia de otros controles, TreeView es un wrapper sobre un control
-        // nativo de Windows (SysTreeView32). El DoubleBuffered por reflection no
-        // alcanza a resolver el parpadeo acá; hay que activar el doble buffer nativo
-        // mandándole directamente el mensaje TVM_SETEXTENDEDSTYLE al control.
+
         private void ActivarDobleBufferNativo(TreeView tree)
         {
             SendMessage(tree.Handle, TVM_SETEXTENDEDSTYLE, (IntPtr)TVS_EX_DOUBLEBUFFER, (IntPtr)TVS_EX_DOUBLEBUFFER);
         }
 
-        // Arma los dos estados posibles del footer (sin sesión / con sesión) y el
-        // mensaje que reemplaza al árbol cuando todavía no hay usuario logueado.
         private void ConfigurarFooter_517OF()
         {
             pnlFooter.BackColor = Estilos.FondoApp;
@@ -264,14 +284,15 @@ namespace GUI_517OF
             btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.Click += (s, e) =>
             {
-                new BitacoraEventoSEG_517OF().Registrar_517OF(new BitacoraEvento_517OF
-                    {
-                        Usuario_517OF = Sesion_517OF.Instancia.UsuarioActual_517OF!,
-                        TipoEvento_517OF = new TipoEvento_517OF { Id_517OF = (int)EventosConocidos_517OF.Logout_517OF }
-                    });
+                CerrarPantallasAbiertas_517OF();
+
+                new BitacoraEventoSEG_517OF().RegistrarEnBitacora_517OF(new BitacoraEvento_517OF
+                {
+                    Usuario_517OF = Sesion_517OF.Instancia.UsuarioActual_517OF!,
+                    TipoEvento_517OF = new TipoEvento_517OF { Id_517OF = (int)EventosConocidos_517OF.Logout_517OF }
+                });
                 Sesion_517OF.Instancia.CerrarSesion_517OF();
                 ActualizarEstadoSidebar_517OF();
-                
             };
             _pnlFooterConSesion.Controls.Add(btnCerrarSesion);
 
@@ -279,7 +300,6 @@ namespace GUI_517OF
             pnlFooter.Controls.Add(_pnlFooterSinSesion);
         }
 
-        // Botón simple, mismo estilo visual que el resto del sidebar.
         private Label CrearBotonFooter_517OF(string texto)
         {
             var lbl = new Label
@@ -296,7 +316,6 @@ namespace GUI_517OF
             return lbl;
         }
 
-        // Decide qué mostrar en el sidebar según haya sesión activa o no.
         private void ActualizarEstadoSidebar_517OF()
         {
             bool haySesion = Sesion_517OF.Instancia.HaySesionActiva_517OF;
@@ -318,6 +337,41 @@ namespace GUI_517OF
                     ActualizarEstadoSidebar_517OF();
                 }
             }
+        }
+
+        private void AjustarAreaMdi_517OF()
+        {
+            if (_mdiClient_517OF == null)
+                return;
+
+            _mdiClient_517OF.Bounds = new Rectangle(
+                pnlSidebar.Width, 0,
+                ClientSize.Width - pnlSidebar.Width,
+                ClientSize.Height);
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            AjustarAreaMdi_517OF();
+        }
+
+        // Cierra la pantalla que esté abierta (si hay alguna) antes de abrir
+        // la nueva — solo se permite una pantalla de trabajo visible a la vez.
+        private void AbrirPantalla_517OF(Form formulario)
+        {
+            CerrarPantallasAbiertas_517OF();
+
+            formulario.MdiParent = this;
+            formulario.Show();
+        }
+        // Cierra todas las pantallas de trabajo abiertas — se usa tanto al
+        // cambiar de pantalla como al cerrar sesión, para no dejar ninguna
+        // pantalla huérfana sin usuario logueado.
+        private void CerrarPantallasAbiertas_517OF()
+        {
+            foreach (Form hijo in MdiChildren.ToArray())
+                hijo.Close();
         }
     }
 }
