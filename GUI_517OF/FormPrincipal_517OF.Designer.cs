@@ -72,7 +72,7 @@
             IsMdiContainer = true;
             Margin = new Padding(3, 4, 3, 4);
             MinimumSize = new Size(1000, 600);
-            Name = "FormPrincipal";
+            Name = "FormPrincipal_517OF";
             StartPosition = FormStartPosition.CenterScreen;
             WindowState = FormWindowState.Maximized;
             pnlSidebar.ResumeLayout(false);

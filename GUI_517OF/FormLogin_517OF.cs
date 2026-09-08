@@ -56,5 +56,10 @@ namespace GUI_517OF
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        private void FormLogin_517OF_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

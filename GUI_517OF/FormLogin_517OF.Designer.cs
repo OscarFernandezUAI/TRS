@@ -170,9 +170,10 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormLogin";
+            Name = "FormLogin_517OF";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "FormLogin";
+            Load += FormLogin_517OF_Load;
             ResumeLayout(false);
             PerformLayout();
         }
