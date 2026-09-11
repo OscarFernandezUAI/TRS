@@ -30,13 +30,22 @@ namespace DAL_517OF
 
             SqlParameter[] parametros = new SqlParameter[]
             {
-                acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
-                acceso.CrearParam_517OF("@Clave_517OF", entidad.ClaveHash_517OF),
-                acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
-                acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
+        acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
+        acceso.CrearParam_517OF("@Clave_517OF", entidad.ClaveHash_517OF),
+        acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
+        acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
             };
 
-            return acceso.Escribir_517OF("sp_Usuario_Alta_517OF", parametros);
+            int resultado = acceso.Escribir_517OF("sp_Usuario_Alta_517OF", parametros);
+
+            if (resultado != 1)
+            {
+                LogArchivo_517OF.RegistrarError_517OF(
+                    "MapperUsuario_517OF.Alta_517OF",
+                    $"No se pudo dar de alta al usuario '{entidad.NombreUsuario_517OF}'.");
+            }
+
+            return resultado;
         }
 
         public int Baja_517OF(Usuario_517OF entidad)
@@ -45,10 +54,19 @@ namespace DAL_517OF
 
             SqlParameter[] parametros = new SqlParameter[]
             {
-                acceso.CrearParam_517OF("@IdUsuario_517OF", entidad.Id_517OF)
+        acceso.CrearParam_517OF("@IdUsuario_517OF", entidad.Id_517OF)
             };
 
-            return acceso.Escribir_517OF("sp_Usuario_Baja_517OF", parametros);
+            int resultado = acceso.Escribir_517OF("sp_Usuario_Baja_517OF", parametros);
+
+            if (resultado != 1)
+            {
+                LogArchivo_517OF.RegistrarError_517OF(
+                    "MapperUsuario_517OF.Baja_517OF",
+                    $"No se pudo dar de baja al usuario con Id {entidad.Id_517OF}.");
+            }
+
+            return resultado;
         }
 
         public int Modificar_517OF(Usuario_517OF entidad)
@@ -57,13 +75,22 @@ namespace DAL_517OF
 
             SqlParameter[] parametros = new SqlParameter[]
             {
-                acceso.CrearParam_517OF("@IdUsuario_517OF", entidad.Id_517OF),
-                acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
-                acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
-                acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
+        acceso.CrearParam_517OF("@IdUsuario_517OF", entidad.Id_517OF),
+        acceso.CrearParam_517OF("@NombreUsuario_517OF", entidad.NombreUsuario_517OF),
+        acceso.CrearParam_517OF("@Nombre_517OF", entidad.Nombre_517OF),
+        acceso.CrearParam_517OF("@Apellido_517OF", entidad.Apellido_517OF)
             };
 
-            return acceso.Escribir_517OF("sp_Usuario_Modificar_517OF", parametros);
+            int resultado = acceso.Escribir_517OF("sp_Usuario_Modificar_517OF", parametros);
+
+            if (resultado != 1)
+            {
+                LogArchivo_517OF.RegistrarError_517OF(
+                    "MapperUsuario_517OF.Modificar_517OF",
+                    $"No se pudo modificar al usuario con Id {entidad.Id_517OF}.");
+            }
+
+            return resultado;
         }
 
         public List<Usuario_517OF> Consultar_517OF()
