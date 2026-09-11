@@ -39,135 +39,69 @@ namespace DAL_SERVICIOS_517OF
                 _conex_517OF = null;
             }
         }
-
-        public int Ejecutar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
-        {
-            Abrir_517OF("MiConexion");
-            int fa = -1;
-
-            using (SqlCommand cmd = new SqlCommand())
-            {
-                cmd.CommandText = nombreSP;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex_517OF;
-
-                if (paramsArray != null)
-                {
-                    cmd.Parameters.AddRange(paramsArray);
-                }
-
-                if (_conex_517OF != null)
-                {
-                    _tx_517OF = _conex_517OF.BeginTransaction();
-                    cmd.Transaction = _tx_517OF;
-                }
-
-                try
-                {
-                    fa = cmd.ExecuteNonQuery();
-                    if (_tx_517OF != null) _tx_517OF.Commit();
-                }
-                catch (Exception)
-                {
-                    fa = -1;
-                    if (_tx_517OF != null) _tx_517OF.Rollback();
-                }
-                finally
-                {
-                    Cerrar_517OF();
-                }
-            }
-
-            return fa;
-        }
-
         public DataTable Leer_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
             DataTable dt = new DataTable();
 
-            using (SqlDataAdapter da = new SqlDataAdapter())
+            try
             {
-                da.SelectCommand = new SqlCommand();
-                da.SelectCommand.CommandText = nombreSP;
-                da.SelectCommand.CommandType = CommandType.StoredProcedure;
-
-                Abrir_517OF("MiConexion");
-                da.SelectCommand.Connection = _conex_517OF;
-
-                if (paramsArray != null)
+                using (SqlDataAdapter da = new SqlDataAdapter())
                 {
-                    da.SelectCommand.Parameters.AddRange(paramsArray);
-                }
+                    da.SelectCommand = new SqlCommand();
+                    da.SelectCommand.CommandText = nombreSP;
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
-                da.Fill(dt);
+                    Abrir_517OF("MiConexion");
+                    da.SelectCommand.Connection = _conex_517OF;
+
+                    if (paramsArray != null)
+                        da.SelectCommand.Parameters.AddRange(paramsArray);
+
+                    da.Fill(dt);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error en Leer_517OF ({nombreSP}): {ex.Message}");
+                LogArchivo_517OF.RegistrarError_517OF("Leer_517OF", $"{nombreSP}: {ex.Message}");
+            }
+            finally
+            {
                 Cerrar_517OF();
             }
 
             return dt;
         }
 
-        public int LeerEscalar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
-        {
-            Abrir_517OF("MiConexion");
-            int valorEscalar = 0;
-
-            using (SqlCommand cmd = new SqlCommand(nombreSP, _conex_517OF))
-            {
-                if (paramsArray != null)
-                {
-                    cmd.Parameters.AddRange(paramsArray);
-                }
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                try
-                {
-                    object resultado = cmd.ExecuteScalar();
-                    if (resultado != null && resultado != DBNull.Value)
-                    {
-                        valorEscalar = Convert.ToInt32(resultado);
-                    }
-                }
-                catch (Exception)
-                {
-                    valorEscalar = 0;
-                }
-                finally
-                {
-                    Cerrar_517OF();
-                }
-            }
-
-            return valorEscalar;
-        }
-
         public int Escribir_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
-            Abrir_517OF("MiConexion");
             int fa = -1;
 
-            using (SqlCommand cmd = new SqlCommand())
+            try
             {
-                cmd.CommandText = nombreSP;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex_517OF;
+                Abrir_517OF("MiConexion");
 
-                if (paramsArray != null)
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.Parameters.AddRange(paramsArray);
-                }
+                    cmd.CommandText = nombreSP;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = _conex_517OF;
 
-                try
-                {
+                    if (paramsArray != null)
+                        cmd.Parameters.AddRange(paramsArray);
+
                     fa = cmd.ExecuteNonQuery();
                 }
-                catch (Exception)
-                {
-                    fa = -1;
-                }
-                finally
-                {
-                    Cerrar_517OF();
-                }
+            }
+            catch (Exception ex)
+            {
+                fa = -1;
+                System.Diagnostics.Debug.WriteLine($"Error en Escribir_517OF ({nombreSP}): {ex.Message}");
+                LogArchivo_517OF.RegistrarError_517OF("Escribir_517OF", $"{nombreSP}: {ex.Message}");
+            }
+            finally
+            {
+                Cerrar_517OF();
             }
 
             return fa;
@@ -175,32 +109,115 @@ namespace DAL_SERVICIOS_517OF
 
         public int EscribirMaster_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
         {
-            Abrir_517OF("MiConexionMaster");
             int fa = -1;
 
-            using (SqlCommand cmd = new SqlCommand())
+            try
             {
-                cmd.CommandText = nombreSP;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = _conex_517OF;
+                Abrir_517OF("MiConexionMaster");
 
-                if (paramsArray != null)
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    cmd.Parameters.AddRange(paramsArray);
-                }
+                    cmd.CommandText = nombreSP;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = _conex_517OF;
 
-                try
-                {
+                    if (paramsArray != null)
+                        cmd.Parameters.AddRange(paramsArray);
+
                     fa = cmd.ExecuteNonQuery();
                 }
-                catch (Exception)
+            }
+            catch (Exception ex)
+            {
+                fa = -1;
+                System.Diagnostics.Debug.WriteLine($"Error en EscribirMaster_517OF ({nombreSP}): {ex.Message}");
+                LogArchivo_517OF.RegistrarError_517OF("EscribirMaster_517OF", $"{nombreSP}: {ex.Message}");
+            }
+            finally
+            {
+                Cerrar_517OF();
+            }
+
+            return fa;
+        }
+
+        public int LeerEscalar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
+        {
+            int valorEscalar = 0;
+
+            try
+            {
+                Abrir_517OF("MiConexion");
+
+                using (SqlCommand cmd = new SqlCommand(nombreSP, _conex_517OF))
                 {
-                    fa = -1;
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (paramsArray != null)
+                        cmd.Parameters.AddRange(paramsArray);
+
+                    object resultado = cmd.ExecuteScalar();
+                    if (resultado != null && resultado != DBNull.Value)
+                        valorEscalar = Convert.ToInt32(resultado);
                 }
-                finally
+            }
+            catch (Exception ex)
+            {
+                valorEscalar = 0;
+                System.Diagnostics.Debug.WriteLine($"Error en LeerEscalar_517OF ({nombreSP}): {ex.Message}");
+                LogArchivo_517OF.RegistrarError_517OF("LeerEscalar_517OF", $"{nombreSP}: {ex.Message}");
+            }
+            finally
+            {
+                Cerrar_517OF();
+            }
+
+            return valorEscalar;
+        }
+
+        public int Ejecutar_517OF(string nombreSP, SqlParameter[]? paramsArray = null)
+        {
+            int fa = -1;
+
+            try
+            {
+                Abrir_517OF("MiConexion");
+
+                using (SqlCommand cmd = new SqlCommand())
                 {
-                    Cerrar_517OF();
+                    cmd.CommandText = nombreSP;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Connection = _conex_517OF;
+
+                    if (paramsArray != null)
+                        cmd.Parameters.AddRange(paramsArray);
+
+                    _tx_517OF = _conex_517OF!.BeginTransaction();
+                    cmd.Transaction = _tx_517OF;
+
+                    try
+                    {
+                        fa = cmd.ExecuteNonQuery();
+                        _tx_517OF!.Commit();
+                    }
+                    catch (Exception exInterna)
+                    {
+                        fa = -1;
+                        _tx_517OF!.Rollback();
+                        System.Diagnostics.Debug.WriteLine($"Error en Ejecutar_517OF ({nombreSP}) durante la transacción: {exInterna.Message}");
+                        LogArchivo_517OF.RegistrarError_517OF("Ejecutar_517OF", $"{nombreSP} (durante transacción): {exInterna.Message}");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                fa = -1;
+                System.Diagnostics.Debug.WriteLine($"Error en Ejecutar_517OF ({nombreSP}) al conectar: {ex.Message}");
+                LogArchivo_517OF.RegistrarError_517OF("Ejecutar_517OF", $"{nombreSP} (al conectar): {ex.Message}");
+            }
+            finally
+            {
+                Cerrar_517OF();
             }
 
             return fa;
